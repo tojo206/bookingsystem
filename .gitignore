@@ -18,3 +18,6 @@ buildNumber.properties
 # Intellij 
 *.iml
 .env
+
+# Allure results
+allure-results/
