@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 
 public class ApiTests {
 
-    Dotenv dotenv = Dotenv.load();
+
     String BASE_URL = "https://restful-booker.herokuapp.com";
-    String username = dotenv.get("USER");
-    String password = dotenv.get("PASSWORD");
+    String username = System.getenv("USERNAME");
+    String password = System.getenv("PASSWORD");
     String bookingId;
 
 
