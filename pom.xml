@@ -59,10 +59,14 @@
 
     </dependencies>
 
+  <pluginRepositories>
+    <pluginRepository>
+      <id>central</id>
+      <url>https://repo.maven.apache.org/maven2</url>
+    </pluginRepository>
+  </pluginRepositories>
+
   <build>
-
-
-
     <plugins>
       <plugin>
         <!-- Build an executable JAR -->
