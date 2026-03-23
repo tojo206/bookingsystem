@@ -6,6 +6,7 @@
         <classes>
             <class name="Tests.LandingPageTest"/>
             <class name="Tests.CreateRoomsTest"/>
+            <class name="Tests.BrandingTests"/>
         </classes>
     </test>
 
