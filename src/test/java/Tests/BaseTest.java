@@ -25,7 +25,7 @@ public class BaseTest {
 
         browser = getEnv("Browser","chrome");
         BaseUrl = getEnv("Url","https://automationintesting.online/");
-        headless = getEnv("Headless","false");
+        headless = getEnv("Headless","true");
         driver = BrowserConfiguration.startBrowser(browser, BaseUrl, Boolean.valueOf(headless));
     }
 
