@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -55,7 +56,62 @@ public class LandingPage {
     //booking
 
     @FindBy(xpath="(//h3[normalize-space()='Check Availability & Book Your Stay'])[1]") private WebElement checkAvailability;
-    
+
+
+    //location
+
+    @FindBy(xpath="(//h2[normalize-space()='Our Location'])[1]") private WebElement ourLocationHeaderText;
+    @FindBy(xpath="(//p[@class='lead text-muted'])[2]") private WebElement SubHeadingText;
+
+    @FindBy(xpath="(//h3[normalize-space()='Contact Information'])[1]") private WebElement contactInformationText;
+
+    @FindBy(xpath="(//div[@class='d-flex mb-4'])[1]") private WebElement address;
+
+    @FindBy(xpath="(//div[@class='d-flex mb-4'])[2]") private WebElement phone;
+
+    @FindBy(xpath="(//div[@class='d-flex mb-4'])[3]") private WebElement email;
+
+    @FindBy(xpath="(//h4[normalize-space()='Getting Here'])[1]") private WebElement gettingHereText;
+    @FindBy(xpath="(//p[contains(text(),'Welcome to Shady Meadows, a delightful Bed & Break')])[2]") private WebElement welcomeToShadyMeadowsText;
+
+    @FindBy(xpath="(//section[@id='location'])[1]") private WebElement map;
+
+
+
+
+    //contact
+
+    @FindBy(xpath="(//h3[normalize-space()='Send Us a Message'])[1]") private WebElement sendUsAMessageText;
+
+    @FindBy(xpath="(//input[@id='name'])[1]") private WebElement nameInput;
+
+    @FindBy(xpath="(//input[@id='email'])[1]") private WebElement emailInput;
+    @FindBy(xpath="(//input[@id='phone'])[1]") private WebElement phoneInput;
+    @FindBy(xpath="(//input[@id='subject'])[1]") private WebElement subjectInput;
+    @FindBy(xpath="(//textarea[@id='description'])[1]") private WebElement descriptionInput;
+    @FindBy(xpath="(//button[normalize-space()='Submit'])[1]") private WebElement submitButton;
+
+    @FindBy(xpath="(//div[@class='card-body p-4'])[2]") private WebElement thanksForGettingInTouchAs;
+
+    @FindBy(xpath= "//div[@class='alert alert-danger']") private WebElement errorMessage;
+
+
+
+    //admin
+
+
+    @FindBy(xpath="(//a[normalize-space()='Restful Booker Platform Demo'])[1]") private WebElement restfulBookerPlatformDemoLink;
+    @FindBy(xpath="(//button[normalize-space()='Logout'])[1]") private WebElement logout;
+    @FindBy(xpath="(//h2[normalize-space()='Login'])[1]") private WebElement loginHeader;
+
+    @FindBy(xpath="(//input[@id='username'])[1]") private WebElement usernameInput;
+    @FindBy(xpath="(//input[@id='password'])[1]") private WebElement passwordInput;
+    @FindBy(xpath="(//button[normalize-space()='Login'])[1]") private WebElement loginButton;
+
+    @FindBy(xpath="(//div[@role='alert'])[1]") private WebElement invalidCredentials;
+
+
+
 
 
         public LandingPage(WebDriver driver) {
@@ -107,7 +163,7 @@ public class LandingPage {
 
             actions.click(roomsLink,"rooms link on nav");
 
-            int totalCards = cardTitle.size();  // assuming all lists are same size
+            int totalCards = cardTitle.size();
 
             actions.verifyVisible(ourRoomsHeader, "our rooms header text");
             actions.verifyVisible(subheadingtext, "our rooms sub text");
@@ -122,9 +178,76 @@ public class LandingPage {
 
 
             }
+        }
+
+        public void verifyAmenitiesFunctionality() {
+
+            actions.click(amenitiesLink, "amenities link on nav");
+            actions.verifyVisible(checkAvailability, "check availability header text");
+            System.out.println("this button does not work but it is visible and clickable ");
+        }
+
+        public void verifyLocationElements() {
+
+            actions.click(LocationLink, "location link on nav");
+            actions.verifyVisible(ourLocationHeaderText, "our location header text");
+            actions.verifyVisible(SubHeadingText, "our location sub heading text");
+            actions.verifyVisible(contactInformationText, "contact information text");
+            actions.verifyVisible(address, "address");
+            actions.verifyVisible(phone, "phone");
+            actions.verifyVisible(email, "email");
+            actions.verifyVisible(gettingHereText, "getting here text");
+            actions.verifyVisible(welcomeToShadyMeadowsText, "welcome to shady meadows text");
+            actions.verifyVisible(map, "map");
+
 
         }
 
+
+        public void verifyContactFunctionality(String name, String email, String phone, String subject, String description) throws InterruptedException {
+
+            actions.click(LocationLink, "contact link on nav");
+            actions.click(ContactLink, "contact link on nav");
+
+
+            Thread.sleep(3000);
+            actions.verifyVisible(sendUsAMessageText, "send us a message text");
+
+            actions.sendKeys(nameInput, name, "name input");
+            actions.sendKeys(emailInput, email, "email input");
+            actions.sendKeys(phoneInput, phone, "phone input");
+            actions.sendKeys(subjectInput, subject, "subject input");
+            actions.sendKeys(descriptionInput, description, "description input");
+
+            actions.click(submitButton, "submit button");
+
+        }
+
+        public void verifySuccessfulFormSubmission() throws InterruptedException {
+            Thread.sleep(2000);
+            actions.verifyVisible(thanksForGettingInTouchAs, "thanks for getting in touch message");
+
+        }
+
+        public void verifyFormValidation() {
+            actions.verifyVisible(errorMessage, "error message");
+        }
+
+
+        public void verifyAdminNavFunctionality(String username, String password) throws InterruptedException {
+            actions.click(adminLink, "admin link on nav");
+            Thread.sleep(2000);
+            actions.verifyVisible(restfulBookerPlatformDemoLink, "restful booker platform demo link");
+            actions.verifyVisible(loginHeader, "login header text");
+            actions.sendKeys(usernameInput,username, "username input");
+            actions.sendKeys(passwordInput,password ,"password input");
+            actions.click(loginButton, "login button");
+
+        }
+
+        public void loginFormValidation(){
+            actions.verifyVisible(invalidCredentials, "invalid credentials error message");
+        }
 
 
 

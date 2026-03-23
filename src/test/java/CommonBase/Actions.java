@@ -27,8 +27,9 @@ public class Actions {
             String originalStyle = "";
             try {
                 wait.until(ExpectedConditions.elementToBeClickable(element));
-                originalStyle = highlight(element);
 
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+                originalStyle = highlight(element);
                 element.click();
 
                 Allure.step("Clicked: " + name);
