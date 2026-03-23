@@ -39,6 +39,7 @@ jobs:
             Headless: ${{ vars.Headless }}
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
+            UIPASSWORD: ${{ secrets.UIPASSWORD }}
 
       - name: Generate Allure Report
         run: |

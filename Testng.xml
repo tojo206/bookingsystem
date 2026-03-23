@@ -5,6 +5,7 @@
     <test name="UI Tests">
         <classes>
             <class name="Tests.LandingPageTest"/>
+            <class name="Tests.CreateRoomsTest"/>
         </classes>
     </test>
 

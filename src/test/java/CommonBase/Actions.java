@@ -4,6 +4,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -70,6 +71,25 @@ public class Actions {
                 Allure.step("Verified visible: " + name);
             } catch (Exception e) {
                 captureError("Visibility check failed on: " + name, e);
+            } finally {
+                restoreStyle(element, originalStyle);
+            }
+        }
+
+        @Step("Select '{visibleText}' from dropdown: {name}")
+        public void selectByVisibleText(WebElement element, String visibleText, String name) {
+            String originalStyle = "";
+            try {
+                wait.until(ExpectedConditions.visibilityOf(element));
+                js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+                originalStyle = highlight(element);
+
+                Select select = new Select(element);
+                select.selectByVisibleText(visibleText);
+
+                Allure.step("Selected '" + visibleText + "' from: " + name);
+            } catch (Exception e) {
+                captureError("Select failed on: " + name, e);
             } finally {
                 restoreStyle(element, originalStyle);
             }
