@@ -114,6 +114,8 @@ public class LandingPage {
 
 
 
+
+
         public LandingPage(WebDriver driver) {
 
             PageFactory.initElements(driver, this);
@@ -248,6 +250,11 @@ public class LandingPage {
         public void loginFormValidation() throws InterruptedException {
             Thread.sleep(3000);
             actions.verifyVisible(invalidCredentials, "invalid credentials error message");
+        }
+
+        public void verifyLogoutFunctionality() throws InterruptedException {
+            actions.click(logout, "logout button");
+            Thread.sleep(2000);
         }
 
 

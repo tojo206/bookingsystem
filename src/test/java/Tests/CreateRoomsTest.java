@@ -32,6 +32,8 @@ public class CreateRoomsTest extends BaseTest {
         roomsPage.verifyRoomsPageElements();
         roomsPage.verifyCreateRoomFunctionality(String.valueOf(randomNum),"Twin","120");
 
+        landingPage.verifyLogoutFunctionality();
+
     }
 
     @Test(priority = 1, description = "testing create rooms functionality with different data")
@@ -49,6 +51,8 @@ public class CreateRoomsTest extends BaseTest {
         roomsPage.verifyRoomsPageElements();
         roomsPage.verifyCreateRoomFunctionality(String.valueOf(randomNum),"Twin","-");
         roomsPage.verifyFormValidation();
+
+        landingPage.verifyLogoutFunctionality();
 
     }
 }
