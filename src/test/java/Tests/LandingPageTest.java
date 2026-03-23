@@ -108,16 +108,4 @@ public class LandingPageTest extends BaseTest{
         landingPage.loginFormValidation();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
 }

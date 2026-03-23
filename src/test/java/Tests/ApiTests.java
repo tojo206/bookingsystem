@@ -124,6 +124,23 @@ public class ApiTests {
 
     }
 
+    @Test(description = "testing delete booking  API", priority = 6)
+    public void testDeleteBookingEndPoint(){
+        ApiHelper api = new ApiHelper(BASE_URL);
+
+        api.createToken(username,password);
+
+        Response response = api.get("/booking");
+        Assert.assertEquals(response.getStatusCode(), 200, "status should be 200");
+
+        String bookingId = response.jsonPath().getString("[0].bookingid");
+        Assert.assertNotNull(bookingId);
+
+        Response deleteResponse = api.delete("/booking/" + bookingId);
+        Assert.assertEquals(deleteResponse.getStatusCode(), 201, "status should be 201");
+
+    }
+
 
 
 
